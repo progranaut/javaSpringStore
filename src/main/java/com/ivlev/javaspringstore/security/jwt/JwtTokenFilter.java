@@ -34,24 +34,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (jwtToken != null && jwtUtils.validate(jwtToken)) {
                 String username = jwtUtils.getUsername(jwtToken);
 
-                System.out.println(username);
-
                 UserDetails userDetails = userDetailService.loadUserByUsername(username);
-
-                System.out.println(userDetails);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
                         null, userDetails.getAuthorities());
 
-                System.out.println("test1");
-
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                System.out.println("test2");
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                System.out.println("test3");
             }
         } catch (Exception e) {
             log.error("Невозможно установить аутентификацию пользователя: {}", e.getMessage());

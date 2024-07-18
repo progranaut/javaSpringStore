@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/add-user")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> addUser(@RequestBody UserRegisterDto userRegisterDto){
         System.out.println(userRegisterDto);
         return userService.addUser(userRegisterDto);

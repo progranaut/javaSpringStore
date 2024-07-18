@@ -21,9 +21,5 @@ public class UserDetailServiceImpl implements UserDetailsService {
                 .map(AppUserDetails::new)
                 .orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден!"));
 
-//        User securityUser = userRepository.findByName(username)
-//                .orElseThrow(() -> new UsernameNotFoundException("Пользователь с именем " + username + " не найден!"));
-//
-//        return new AppUserDetails(securityUser);
     }
 }
