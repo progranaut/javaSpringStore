@@ -5,18 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserRegisterDto {
+public class UserProductRelationDto {
 
-    private String id;
+    private ProductDto productDto;
 
-    private String email;
-
-    private Set<String> roles;
+    private int quantity;
 
 }

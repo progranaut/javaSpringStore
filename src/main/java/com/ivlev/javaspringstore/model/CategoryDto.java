@@ -11,10 +11,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDto {
+public class CategoryDto {
 
-    //private String id;
+    private UUID id;
 
-    private String roleType;
+    private String categoryType;
 
 }

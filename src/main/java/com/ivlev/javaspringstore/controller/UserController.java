@@ -1,6 +1,6 @@
 package com.ivlev.javaspringstore.controller;
 
-import com.ivlev.javaspringstore.model.UserRegisterDto;
+import com.ivlev.javaspringstore.model.UserAddDto;
 import com.ivlev.javaspringstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +19,9 @@ public class UserController {
 
     @PostMapping("/add-user")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> addUser(@RequestBody UserRegisterDto userRegisterDto){
-        System.out.println(userRegisterDto);
-        return userService.addUser(userRegisterDto);
+    public ResponseEntity<?> addUser(@RequestBody UserAddDto userAddDto){
+        System.out.println(userAddDto);
+        return userService.addUser(userAddDto);
     }
 
 }

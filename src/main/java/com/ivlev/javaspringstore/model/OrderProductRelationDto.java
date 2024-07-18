@@ -11,10 +11,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDto {
+public class OrderProductRelationDto {
 
-    //private String id;
+    private ProductDto productDto;
 
-    private String roleType;
+    private int relation;
+
+    private Double relationPrice;
 
 }

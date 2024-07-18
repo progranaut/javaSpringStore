@@ -5,16 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDto {
+public class UserAddDto {
 
-    //private String id;
+    private String id;
 
-    private String roleType;
+    private String email;
+
+    private Set<String> roles;
 
 }

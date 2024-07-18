@@ -11,10 +11,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDto {
+public class UserDto {
 
-    //private String id;
+    private UUID id;
 
-    private String roleType;
+    private String name;
+
+    private String phoneNumber;
+
+    private String address;
+
+    private String email;
 
 }

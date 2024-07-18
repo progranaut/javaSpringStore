@@ -55,8 +55,29 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) ->
-                        auth.requestMatchers("/auth/**", "/users/add-user").permitAll()
+                        auth.requestMatchers("/auth/**",
+                                        "/users/add-user",
+                                        "/",
+                                        "/home",
+                                        "/store/user-registration-v2",
+                                        "/store/all-products",
+                                        "/store/current-user-name-roll",
+                                        "/message/call-order",
+                                        "/style.css",
+                                        "/js/**",
+                                        "/img/**").permitAll()
                                 .requestMatchers("/app/**").permitAll()
+                                .requestMatchers(
+                                        "/roles/**",
+                                        "/admin",
+                                        "/users/add",
+                                        "/users/all",
+                                        "/products/**",
+                                        "/orders/all-orders",
+                                        "/orders/all-user-order/**",
+                                        "/files/**",
+                                        "/category/**")
+                                .hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
                 .exceptionHandling(configurer -> configurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))

@@ -1,20 +1,21 @@
 package com.ivlev.javaspringstore.model;
 
+import com.ivlev.javaspringstore.model.RoleDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class RoleDto {
+public class UserNameAndRoleDto {
 
-    //private String id;
+    private String name;
 
-    private String roleType;
+    private Set<RoleDto> roles;
 
 }

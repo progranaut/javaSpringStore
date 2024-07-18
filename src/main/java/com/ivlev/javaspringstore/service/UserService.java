@@ -2,12 +2,17 @@ package com.ivlev.javaspringstore.service;
 
 import com.ivlev.javaspringstore.entity.Role;
 import com.ivlev.javaspringstore.entity.User;
-import com.ivlev.javaspringstore.enums.RoleType;
-import com.ivlev.javaspringstore.model.UserRegisterDto;
+import com.ivlev.javaspringstore.model.RoleDto;
+import com.ivlev.javaspringstore.model.UserAddDto;
+import com.ivlev.javaspringstore.model.UserDto;
+import com.ivlev.javaspringstore.model.UserNameAndRoleDto;
 import com.ivlev.javaspringstore.repository.UserRepository;
+import com.ivlev.javaspringstore.security.AppUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -22,15 +27,15 @@ public class UserService {
 
     private final RoleService roleService;
 
-    public ResponseEntity<?> addUser(UserRegisterDto userRegisterDto) {
+    public ResponseEntity<?> addUser(UserAddDto userAddDto) {
 
-        Set<Role> roles = roleService.getRoles(userRegisterDto.getRoles());
+        Set<Role> roles = roleService.getRoles(userAddDto.getRoles());
 
         System.out.println(roles);
 
         User user = User.builder()
-                .id(UUID.fromString(userRegisterDto.getId()))
-                .email(userRegisterDto.getEmail())
+                .id(UUID.fromString(userAddDto.getId()))
+                .email(userAddDto.getEmail())
                 //.phoneNumber(userDto.getPhoneNumber())
                 //.address(userDto.getAddress())
                 //.email(userDto.getEmail())
@@ -40,7 +45,79 @@ public class UserService {
         userRepository.save(user);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
 
+    public ResponseEntity<?> getCurrentUserNameAndRole() {
+
+        User user = getCurrentUser();
+
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Set<Role> roles = user.getRoles();
+        Set<RoleDto> roleDtoSet = roles.stream()
+                .map(role -> RoleDto.builder()
+                .roleType(role.getRoleType().toString())
+                .build())
+                .collect(Collectors.toSet());
+
+        return new ResponseEntity<>(UserNameAndRoleDto.builder()
+                .name(user.getName())
+                .roles(roleDtoSet)
+                .build(), HttpStatus.OK);
+    }
+
+    public User getCurrentUser() {
+
+        Object principal = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        System.out.println(SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .isAuthenticated());
+
+        if (principal == null) {
+            return null;
+        }
+
+        if (!(principal instanceof AppUserDetails)) {
+            return null;
+        }
+
+        System.out.println(principal);
+
+        AppUserDetails userDetails = (AppUserDetails) principal;
+
+        System.out.println(userDetails.getUsername());
+
+        User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow();
+
+        return user;
+    }
+
+    public UserDto getCurrentUserDto() {
+
+        User user = getCurrentUser();
+
+        return toDto(user);
+
+    }
+
+    public UserDto toDto(User user) {
+
+        UserDto userDto = UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .phoneNumber(user.getPhoneNumber())
+                .address(user.getAddress())
+                .email(user.getEmail())
+                .build();
+
+        return userDto;
     }
 
 }

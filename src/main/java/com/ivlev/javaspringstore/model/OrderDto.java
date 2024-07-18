@@ -5,16 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDto {
+public class OrderDto {
 
-    //private String id;
+    private UUID id;
 
-    private String roleType;
+    private Long orderNumber;
+
+    private String date;
+
+    private UserDto userDto;
+
+    private Set<OrderProductRelationDto> relations;
 
 }

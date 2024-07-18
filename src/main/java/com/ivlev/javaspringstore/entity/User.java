@@ -39,7 +39,7 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<UserProductRelation> userProductRelationSet;
+    @OneToMany(mappedBy = "user")
+    private Set<UserProductRelation> userProductRelationSet;
 
 }
