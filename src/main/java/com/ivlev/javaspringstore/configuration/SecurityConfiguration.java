@@ -55,7 +55,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) ->
-                        auth.requestMatchers("/auth/**",
+                        auth.requestMatchers(
                                         "/users/add-user",
                                         "/",
                                         "/home",
@@ -68,6 +68,7 @@ public class SecurityConfiguration {
                                         "/img/**").permitAll()
                                 .requestMatchers("/app/**").permitAll()
                                 .requestMatchers(
+                                        "/auth/**",
                                         "/roles/**",
                                         "/admin",
                                         "/users/add",
@@ -76,7 +77,8 @@ public class SecurityConfiguration {
                                         "/orders/all-orders",
                                         "/orders/all-user-order/**",
                                         "/files/**",
-                                        "/category/**")
+                                        "/category/**",
+                                        "/store/add-basket")
                                 .hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

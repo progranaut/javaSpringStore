@@ -5,6 +5,7 @@ import com.ivlev.javaspringstore.service.StoreService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -34,9 +35,7 @@ public class StoreController {
 
     @GetMapping("/all-products-in-basket")
     public List<UserProductRelationDto> getProductsInCart () {
-
         return storeService.getAllProductsInBasket();
-
     }
 
     @GetMapping("/product-in-basket/{id}")
