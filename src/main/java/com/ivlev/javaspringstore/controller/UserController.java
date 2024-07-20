@@ -1,6 +1,7 @@
 package com.ivlev.javaspringstore.controller;
 
 import com.ivlev.javaspringstore.model.UserAddDto;
+import com.ivlev.javaspringstore.model.UserDto;
 import com.ivlev.javaspringstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class UserController {
     public ResponseEntity<?> addUser(@RequestBody UserAddDto userAddDto){
         System.out.println(userAddDto);
         return userService.addUser(userAddDto);
+    }
+
+    @PostMapping("/change")
+    public void changeUser(@RequestBody UserDto userDto) {
+        userService.changeUser(userDto);
     }
 
 }

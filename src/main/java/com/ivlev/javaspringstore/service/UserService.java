@@ -47,6 +47,21 @@ public class UserService {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    public void changeUser(UserDto userDto){
+
+        User user = getCurrentUser();
+        user.setName(userDto.getName());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setAddress(userDto.getAddress());
+
+        changeUser(user);
+
+    }
+
+    public void changeUser(User user) {
+        userRepository.save(user);
+    }
+
     public ResponseEntity<?> getCurrentUserNameAndRole() {
 
         User user = getCurrentUser();

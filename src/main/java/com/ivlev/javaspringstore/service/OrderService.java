@@ -73,9 +73,9 @@ public class OrderService {
 
         List<Order> orders = orderRepository.findAllByUserId(user.getId());
 
-        if (orders.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//        if (orders.isEmpty()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
 
         return new ResponseEntity<>(toOrderDtoList(orders), HttpStatus.OK);
     }
