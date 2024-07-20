@@ -31,7 +31,7 @@ public class StoreService {
 
     private final CategoryService categoryService;
 
-    //private final MessageService messageService;
+    private final MessageService messageService;
 
     public ResponseEntity<?> addProductInBasket(UUID id) {
 
@@ -203,7 +203,7 @@ public class StoreService {
 
         userProductRelationService.delAllUserProductRelation(userProductRelations);
 
-        //messageService.sendOrderInfo(user, order, orderProductRelations);
+        messageService.sendOrderInfo(user, order, orderProductRelations);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
