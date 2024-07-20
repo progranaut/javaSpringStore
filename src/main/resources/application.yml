@@ -17,7 +17,7 @@ spring:
 
 app:
   jwt:
-    secret: "someSecretKey"
+    secret: someSecretKey
 
 bot:
   url: http://194.87.237.31:8087

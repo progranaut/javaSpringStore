@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -120,6 +121,18 @@ public class UserService {
 
         return toDto(user);
 
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> UserDto.builder()
+                        .id(user.getId())
+                        .name(user.getName())
+                        .phoneNumber(user.getPhoneNumber())
+                        .address(user.getAddress())
+                        .email(user.getEmail())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     public UserDto toDto(User user) {

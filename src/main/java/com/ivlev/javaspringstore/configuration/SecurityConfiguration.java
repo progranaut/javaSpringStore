@@ -77,8 +77,8 @@ public class SecurityConfiguration {
                                         "/orders/all-orders",
                                         "/orders/all-user-order/**",
                                         "/files/**",
-                                        "/category/**",
-                                        "/store/add-basket")
+                                        "/store/add-basket",
+                                        "/category/all-product-categories")
                                 .hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

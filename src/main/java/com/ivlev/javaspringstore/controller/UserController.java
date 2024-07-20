@@ -6,10 +6,9 @@ import com.ivlev.javaspringstore.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +27,11 @@ public class UserController {
     @PostMapping("/change")
     public void changeUser(@RequestBody UserDto userDto) {
         userService.changeUser(userDto);
+    }
+
+    @GetMapping("/all")
+    public List<UserDto> getAllUsers() {
+        return userService.getAllUsers();
     }
 
 }
