@@ -54,21 +54,20 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((auth) ->
-                        auth.requestMatchers("/app/**").permitAll()
-                                .requestMatchers(
+        http.authorizeHttpRequests((auth) -> auth
+                        .requestMatchers(
                                         "/",
                                         "/home",
                                         "/store/all-products",
                                         "/store/current-user-name-roll",
                                         "/message/call-order").permitAll()
-                                .requestMatchers(
+                        .requestMatchers(
                                         "/users/add",
                                         "/users/all",
-                                        "/products",
+                                        "/products/**",
                                         "/orders/all-orders",
                                         "/orders/all-user-order/**",
-                                        "/category")
+                                        "/category/**")
                                 .hasRole("ADMIN")
                                 .anyRequest().authenticated())
                 .exceptionHandling(configurer -> configurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))
