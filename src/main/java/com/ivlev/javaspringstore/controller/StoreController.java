@@ -64,9 +64,4 @@ public class StoreController {
         return storeService.addOrder();
     }
 
-//    @GetMapping("/all-product-categories")
-//    public List<CategoryDto> getProductCategories(){
-//        return storeService.getAllProductCategories();
-//    }
-
 }

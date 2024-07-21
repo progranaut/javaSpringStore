@@ -55,33 +55,22 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) ->
-                        auth.requestMatchers(
-                                        "/users/add-user",
+                        auth.requestMatchers("/app/**").permitAll()
+                                .requestMatchers(
                                         "/",
                                         "/home",
-                                        "/store/user-registration-v2",
                                         "/store/all-products",
                                         "/store/current-user-name-roll",
-                                        "/message/call-order",
-                                        "/style.css",
-                                        "/js/**",
-                                        "/img/**").permitAll()
-                                .requestMatchers("/app/**").permitAll()
+                                        "/message/call-order").permitAll()
                                 .requestMatchers(
-                                        "/auth/**",
-                                        "/roles/**",
-                                        "/admin",
                                         "/users/add",
                                         "/users/all",
-                                        "/products/**",
+                                        "/products",
                                         "/orders/all-orders",
                                         "/orders/all-user-order/**",
-                                        "/files/**",
-                                        "/store/add-basket",
-                                        "/category/all-product-categories")
+                                        "/category")
                                 .hasRole("ADMIN")
-                                .anyRequest().authenticated()
-                )
+                                .anyRequest().authenticated())
                 .exceptionHandling(configurer -> configurer.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
@@ -89,7 +78,6 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 

@@ -15,22 +15,6 @@ public class JwtUtils {
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
-//    @Value("${app.jwt.tokenExpiration}")
-//    private Duration tokenExpiration;
-
-//    public String generateJwtToken(AppUserDetails userDetails) {
-//        return generateTokenFromUsername(userDetails.getUsername());
-//    }
-
-//    public String generateTokenFromUsername(String username) {
-//        return Jwts.builder()
-//                .setSubject(username)
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date(new Date().getTime() + tokenExpiration.toMillis()))
-//                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-//                .compact();
-//    }
-
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(jwtSecret)
                 .parseClaimsJws(token).getBody().getSubject();

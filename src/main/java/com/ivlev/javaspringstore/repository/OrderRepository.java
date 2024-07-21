@@ -13,8 +13,6 @@ import java.util.UUID;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, UUID> {
-
-    @Query("FROM Order o WHERE o.user.id = :id")
     List<Order> findAllByUserId(UUID id);
 
     @Transactional
@@ -22,5 +20,4 @@ public interface OrderRepository extends JpaRepository<Order, UUID> {
     @Query(value = "INSERT INTO orders (id, date, user_id)" +
             "VALUES (:id, :time, :userId)", nativeQuery = true)
     void saveOrder(UUID id, LocalDateTime time, UUID userId);
-
 }

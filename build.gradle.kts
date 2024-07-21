@@ -29,16 +29,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-
 	implementation("org.springframework.boot:spring-boot-starter-security")
-
 	implementation("org.springframework.security:spring-security-web:6.3.1")
-
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("javax.xml.bind:jaxb-api:2.3.1")
-
-//	implementation("org.mapstruct:mapstruct:1.5.5.Final")
-
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")
